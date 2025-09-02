@@ -5,13 +5,11 @@ import { ProductDetailView } from "./components/product-detail-view";
 import prisma from "@/lib/prisma";
 
 interface ProductPageProps {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { id } = params;
+  const { id } = await params;
 
   if (!id) {
     return (
@@ -47,16 +45,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
     );
   }
 
-  const product:any = await prisma.product
+  const product: any = await prisma.product
     .findFirst({
       where: { id: parseInt(id) },
       include: {
         subscriptionPlans: {
-          select:{
-            three:true,
-            six:true,
-            twelve:true
-          }
+          select: {
+            three: true,
+            six: true,
+            twelve: true,
+          },
         },
       },
     })
