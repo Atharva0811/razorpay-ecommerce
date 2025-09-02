@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  category    String
+  features    String[]
+  status      Status
+  imageUrl    String
+
+  subscriptionPlans SubscriptionPlan?
+  userSubscriptions UserSubscription[]
+}
+
+model SubscriptionPlan {
+  id     Int  @id @default(autoincrement())
+  three  Int?
+  six    Int?
+  twelve Int?
+
+  productId Int     @unique
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+enum Status {
+  active
+  draft
+  archived
+}
+
+model User {
+  id        String    @id @default(cuid())
+  username  String    @unique
+  email     String    @unique
+  password  String
+  role      Role      @default(USER)
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  lastLogin DateTime?
+
+  subscriptions UserSubscription[]
+
+  @@map("users")
+}
+
+model UserSubscription {
+  id        String             @id @default(cuid())
+  userId    String
+  user      User               @relation(fields: [userId], references: [id])
+  productId Int
+  product   Product            @relation(fields: [productId], references: [id])
+  planType  PlanType
+  status    SubscriptionStatus
+  startDate DateTime
+  endDate   DateTime
+  amount    Int
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+
+  @@unique([userId, productId])
+  @@map("user_subscriptions")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+enum PlanType {
+  THREE_MONTHS
+  SIX_MONTHS
+  TWELVE_MONTHS
+}
