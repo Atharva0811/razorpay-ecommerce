@@ -4,7 +4,7 @@
 import React, { useActionState, useEffect } from "react";
 import { Eye, EyeOff, Mail, Lock, ShoppingBag } from "lucide-react";
 import { loginAction, LoginState } from "../server/userLogin/signIn";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
@@ -34,7 +34,8 @@ const LoginPage = () => {
       toast(`${state.errors.general[0]}`);
     }
     if (state.success) {
-      toast("Log-in successful");
+      toast("✅Log-in successful");
+      redirect("/")
     }
   }, [state.success, state.errors, router]);
 

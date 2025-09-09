@@ -172,7 +172,9 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
         <div className="mt-6 space-y-4">
           <div className="flex items-start justify-between">
             <div>
-              <h2 className="text-2xl font-bold">{product.name}</h2>
+              <h2 className="md:text-2xl sm:text-xl text-lg font-bold">
+                {product.name}
+              </h2>
               <p className="text-muted-foreground">{product.category}</p>
             </div>
             <Badge variant={statusVariant} className="capitalize">
@@ -188,7 +190,9 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
                 className="h-4 w-4 fill-yellow-400 text-yellow-400"
               />
             ))}
-            <span className="text-sm text-muted-foreground ml-2">(4.8)</span>
+            <span className="sm:text-sm text-xs text-muted-foreground ml-2">
+              (4.8)
+            </span>
           </div>
         </div>
       </div>
@@ -199,10 +203,10 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-semibold">
+                <h3 className="sm:text-xl text-lg font-semibold">
                   Choose Your Subscription
                 </h3>
-                <div className="flex items-center text-sm text-muted-foreground">
+                <div className="flex items-center sm:text-sm text-xs text-muted-foreground">
                   <Clock className="h-4 w-4 mr-1" />
                   Cancel anytime
                 </div>
@@ -230,7 +234,7 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
                         </div>
                       )}
                       <div
-                        className={`flex items-center space-x-4 border rounded-lg p-4 cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors ${
+                        className={`flex items-center space-x-4 border rounded-lg sm:p-4 py-4 px-2 cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors ${
                           isBestValue
                             ? "border-green-500 bg-green-50 dark:bg-green-950"
                             : ""
@@ -241,20 +245,21 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
                           htmlFor={duration}
                           className="flex-1 cursor-pointer"
                         >
-                          <div className="flex justify-between items-center space-x-3">
+                          <div className="flex justify-between items-center w-full sm:space-x-3">
                             <div>
-                              <span className="font-semibold text-lg">
+                              <span className="font-semibold sm:text-lg">
                                 {getDurationLabel(duration)}
                               </span>
-                              <p className="text-sm text-muted-foreground">
+                              <p className="sm:text-sm text-xs text-muted-foreground">
                                 {formattedPrice(monthlyPrice)}/month
                               </p>
                             </div>
+                            <div></div>
                             <div className="text-right">
-                              <p className="font-bold text-lg">
+                              <p className="font-bold sm:text-lg">
                                 {formattedPrice(price as number)}
                               </p>
-                              <p className="text-sm text-muted-foreground">
+                              <p className="sm:text-sm text-xs text-muted-foreground">
                                 Total for {months} months
                               </p>
                             </div>
@@ -270,10 +275,10 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
 
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                  <p className="text-2xl font-bold">
+                  <p className="md:text-2xl sm:text-xl text-lg font-bold">
                     {formattedPrice(selectedPrice)}
                   </p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="sm:text-sm text-xs text-muted-foreground">
                     {formattedPrice(
                       getMonthlyPrice(
                         selectedPrice,
@@ -339,7 +344,7 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
             <CardContent className="p-6 text-center">
               <div className="text-muted-foreground">
                 <ShoppingCart className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                <h3 className="text-lg font-semibold mb-2">
+                <h3 className="sm:text-lg font-semibold mb-2">
                   No Pricing Available
                 </h3>
                 <p>This product is currently not available for subscription.</p>
@@ -350,7 +355,9 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-xl font-semibold mb-3">About This Product</h3>
+            <h3 className="md:text-xl sm:text-lg font-semibold mb-3">
+              About This Product
+            </h3>
             <p className="text-muted-foreground leading-relaxed">
               {product.description}
             </p>
@@ -358,7 +365,7 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
 
           {product.features && product.features.length > 0 && (
             <div>
-              <h3 className="text-xl font-semibold mb-3">What's Included</h3>
+              <h3 className="md:text-xl sm:text-lg font-semibold mb-3">What's Included</h3>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {product.features.map((feature, index) => (
                   <li key={index} className="flex items-start space-x-2">
@@ -372,28 +379,28 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
 
           {plan && availablePlans.length > 0 && (
             <div>
-              <h3 className="text-xl font-semibold mb-3">
+              <h3 className="md:text-xl sm:text-lg font-semibold mb-3">
                 Subscription Benefits
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="text-center p-4 border rounded-lg">
                   <Clock className="h-8 w-8 mx-auto mb-2 text-blue-500" />
                   <h4 className="font-semibold mb-1">Flexible Terms</h4>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="sm:text-sm text-xs text-muted-foreground">
                     Choose the perfect duration for your needs
                   </p>
                 </div>
                 <div className="text-center p-4 border rounded-lg">
                   <Check className="h-8 w-8 mx-auto mb-2 text-green-500" />
                   <h4 className="font-semibold mb-1">Easy Management</h4>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="sm:text-sm text-xs text-muted-foreground">
                     Cancel or modify anytime
                   </p>
                 </div>
                 <div className="text-center p-4 border rounded-lg">
                   <Star className="h-8 w-8 mx-auto mb-2 text-yellow-500" />
                   <h4 className="font-semibold mb-1">Premium Support</h4>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="sm:text-sm text-xs text-muted-foreground">
                     24/7 customer service
                   </p>
                 </div>
