@@ -8,9 +8,13 @@ async function main() {
   console.log("Start seeding...");
 
   // Delete all existing data to ensure a clean slate
-  await prisma.subscriptionPlan.deleteMany({});
-  await prisma.product.deleteMany({});
-  await prisma.user.deleteMany({})
+  try {
+    await prisma.subscriptionPlan.deleteMany({});
+    await prisma.product.deleteMany({});
+    await prisma.user.deleteMany({});
+  } catch (e) {
+    console.log(e);
+  }
 
   // Loop through your sample data to create products
   for (const productData of sampleProductsData) {
@@ -39,7 +43,7 @@ async function main() {
     data: {
       username: "admin",
       password: "admin12345",
-      email:"testing@inaiways.com"
+      email: "testing@inaiways.com",
     },
   });
 
