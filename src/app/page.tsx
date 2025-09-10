@@ -38,8 +38,8 @@ export default async function ProductsPage() {
         <Dialog>
           <DialogTrigger asChild>
             <Button className="bg-blue-700">
-              <PlusCircle className="mr-2 h-4 w-4" />
-              Add New Product
+              <PlusCircle className="sm:mr-2 h-4 w-4" />
+              <span className="hidden sm:flex">Add New Product</span>
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[800px]">
